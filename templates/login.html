@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Вход</title>
+</head>
+<body>
+<h1>Вход для администратора</h1>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+  {% for message in messages %}
+  <li style="color: red;">{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+<form method="POST">
+  <label>Логин: <input type="text" name="username" required></label><br>
+  <label>Пароль: <input type="password" name="password" required></label><br>
+  <button type="submit">Войти</button>
+</form>
+</body>
+</html>
