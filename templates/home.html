@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Магазин</title>
+</head>
+<body>
+<h1>Наши товары</h1>
+
+{% if current_user.is_authenticated and current_user.is_admin %}
+<a href="{{ url_for('admin_dashboard') }}">Админ-панель</a>
+<a href="{{ url_for('logout') }}">Выйти</a>
+{% else %}
+<a href="{{ url_for('login') }}">Вход для админа</a>
+{% endif %}
+
+<div class="products">
+    {% for product in products %}
+    <div class="product">
+        <h3>{{ product.name }}</h3>
+        <p>Цена: {{ product.price }} ₽</p>
+        <p>{% if product.in_stock %}В наличии{% else %}Нет в наличии{% endif %}</p>
+        {% if product.image_path %}
+        <img src="{{ url_for('static', filename=product.image_path) }}" width="200">
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>
